@@ -41,8 +41,9 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
-        The method should return a dictionary with the following key-value pairs:
-            index: the current start index of the return page. 
+        The method should return a dictionary with the following
+        key-value pairs:
+            index: the current start index of the return page.
             next_index: the next index to query with.
             page_size: the current page size
             data: the actual page of the dataset
