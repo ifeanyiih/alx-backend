@@ -39,7 +39,6 @@ class LRUCache(BaseCaching):
             self.incr += 1
             self.use_count[key] = self.incr
             print(f"DISCARD: {delete_candidate}")
-            print(self.use_count)
         else:
             self.cache_data[key] = item
             self.incr += 1
