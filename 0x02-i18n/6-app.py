@@ -4,10 +4,11 @@ Instantiate a Babel object.
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
+from typing import Mapping, Dict
 
 app = Flask(__name__)
 babel = Babel(app)
-users = {
+users: Mapping = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
@@ -15,7 +16,7 @@ users = {
 }
 
 
-def get_user(ID: int) -> dict:
+def get_user(ID: int) -> Dict:
     """Returns a user dictionary
     or None"""
     if users.get(ID):
@@ -27,16 +28,16 @@ class Config(object):
     """Configuration class
     Class will serve as configuration for
     the flask app object"""
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
+    LANGUAGES: LIST[str] = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE: str = "en"
+    BABEL_DEFAULT_TIMEZONE: str = "UTC"
 
 
 app.config.from_object(Config)
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """Function to be executed before
     any request"""
     login_as = request.args.get('login_as')
