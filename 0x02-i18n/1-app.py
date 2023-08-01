@@ -23,5 +23,6 @@ app.config.from_object(Config)
 
 @app.route("/")
 def home() -> str:
-    """home route"""
+    """home route.
+    This is the root of the application"""
     return render_template('1-index.html')
