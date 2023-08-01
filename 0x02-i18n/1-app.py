@@ -9,7 +9,7 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
-class Config():
+class Config(object):
     """Configuration class
     Class will serve as configuration for
     the flask app object"""
@@ -19,6 +19,7 @@ class Config():
 
 
 app.config.from_object(Config)
+
 
 @app.route("/")
 def home() -> str:
