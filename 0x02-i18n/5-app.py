@@ -14,6 +14,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 def get_user(ID: int) -> dict:
     """Returns a user dictionary
     or None"""
@@ -33,6 +34,7 @@ class Config(object):
 
 app.config.from_object(Config)
 
+
 @app.before_request
 def before_request():
     """Function to be executed before
@@ -40,6 +42,7 @@ def before_request():
     login_as = request.args.get('login_as')
     if login_as:
         g.user = get_user(int(login_as))
+
 
 @babel.localeselector
 def get_locale() -> str:
