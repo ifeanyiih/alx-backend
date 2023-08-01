@@ -4,10 +4,10 @@ Instantiate a Babel object.
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
-from typing import Mapping, Dict, List
+from typing import Mapping, Dict, List, Union
 
-app = Flask(__name__)
-babel = Babel(app)
+app: Flask = Flask(__name__)
+babel: Babel = Babel(app)
 users: Mapping = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -16,7 +16,7 @@ users: Mapping = {
 }
 
 
-def get_user(ID: int) -> Dict:
+def get_user(ID: int) -> Union[Dict, None]:
     """Returns a user dictionary
     or None"""
     if users.get(ID):
@@ -50,9 +50,13 @@ def get_locale() -> str:
     """determines the best match
     with supported languages"""
     locale = request.args.get('locale')
+    login_as = request.args.get('login_as')
+    user = None
+    if login_as:
+        user = get_user(int(login_as))
     if locale and locale in app.config['LANGUAGES']:
         return locale
-    if g.user and g.user['locale'] in app.config['LANGUAGES']:
+    if user and user['locale'] in app.config['LANGUAGES']:
         return g.user['locale']
     if request.accept_languages:
         return request.accept_languages.best_match(app.config['LANGUAGES'])
