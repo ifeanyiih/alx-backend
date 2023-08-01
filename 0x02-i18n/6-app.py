@@ -4,7 +4,7 @@ Instantiate a Babel object.
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
-from typing import Mapping, Dict
+from typing import Mapping, Dict, List
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -28,7 +28,7 @@ class Config(object):
     """Configuration class
     Class will serve as configuration for
     the flask app object"""
-    LANGUAGES: LIST[str] = ["en", "fr"]
+    LANGUAGES: List[str] = ["en", "fr"]
     BABEL_DEFAULT_LOCALE: str = "en"
     BABEL_DEFAULT_TIMEZONE: str = "UTC"
 
