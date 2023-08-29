@@ -1,8 +1,8 @@
 const kue = require('kue');
 
 const job_data = {
-  phoneNumber: '0123 456 789',
-  message: 'phone Number',
+  phoneNumber: '4153518780',
+  message: 'This is the code to verify your account',
 }
 
 const queue = kue.createQueue();
