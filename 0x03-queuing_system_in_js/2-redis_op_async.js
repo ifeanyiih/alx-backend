@@ -9,14 +9,14 @@ client.on('ready', () => console.log('Redis client connected to the server'));
 function setNewSchool(schoolName, value) {
     client.set(schoolName, value, (err, reply) => {
         if (err) console.log(err);
-        console.log(`Reply: ${reply}`);
+        print(`Reply: ${reply}`);
     });
 }
 
 function displaySchoolValue(schoolName) {
     client.get(schoolName, (err, reply) => {
         if (err) console.log(err);
-        console.log(reply);
+        print(reply);
     });
 }
 
