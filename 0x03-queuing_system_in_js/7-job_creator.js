@@ -59,12 +59,12 @@ for (let job of jobs) {
     });
     
     queuedJob.on('complete', (result) => {
-        console.log(`Notification job ${queuedJob.id} completed`);
+        console.log(`Notification job #${queuedJob.id} completed`);
     });
 
-    queuedJob.on('failed', (err) => console.log(`Notification job JOB_ID failed: ${err}`));
+    queuedJob.on('failed', (err) => console.log(`Notification job #${queuedJob.id} failed: ${err}`));
 
     queuedJob.on('progress', (progress, data) => {
-        console.log(`Notification job ${queuedJob.id} ${progress}% complete`);
+        console.log(`Notification job #${queuedJob.id} ${progress}% complete`);
     });
 }
