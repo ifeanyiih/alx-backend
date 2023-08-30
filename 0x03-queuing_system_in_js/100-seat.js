@@ -8,8 +8,6 @@ const express = require('express');
 const app = express();
 const port = 1245;
 
-client.set('available_seats', 50);
-client.set('reservationEnabled', 1);
 
 
 function reserveSeat(number) {
@@ -39,7 +37,7 @@ app.get('/reserve_seat', async (req, res) => {
         res.send(JSON.stringify(response));
     } else {
         res.statusCode = 200;
-        const job = queue.create('reserve_seat', {"status":"Reservation in process"});
+        const job = queue.create('reserve_seat', {"seat": 1});
         job.save((err) => {
             if (!err) {
                 const data = { "status": "Reservation in process" };
@@ -76,6 +74,12 @@ app.get('/process', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(data));
 });
+
+// reserves 50 seats
+reserveSeat(50);
+
+// reservation is enabled
+client.set('reservationEnabled', 1);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
